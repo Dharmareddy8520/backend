@@ -2,11 +2,13 @@ const express = require("express");
 const app = express();
 var bodyParser = require("body-parser");
 const cors = require("cors");
+require("dotenv").config();
+
+const port = process.env.PORT || 4242;
 
 // This is your test secret API key.
-const stripe = require("stripe")(
-  "sk_test_51N9WCFSIOtVITHzbuO13H9okThOHPEA8VvT64ji46UG8YNOTY62CxYYY50XRzy4KrdypGKxHe1Vrp6VG4W9LFdG000k4XyACu3"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -37,4 +39,4 @@ app.post("/create-payment-intent", async (req, res) => {
   });
 });
 
-app.listen(4242, () => console.log("Node server listening on port 4242!"));
+app.listen(port, () => console.log(`Node server listening on port ${port}!`));
