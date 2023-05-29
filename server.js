@@ -26,6 +26,10 @@ app.get("/home", function (req, res) {
   res.send("hello world");
 });
 
+app.get("/", function (req, res) {
+  res.send("rootpage");
+});
+
 app.post("/create-payment-intent", async (req, res) => {
   const { items } = req.body;
 
